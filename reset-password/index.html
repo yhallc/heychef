@@ -416,7 +416,7 @@
             </button>
         </form>
 
-        <a href="../index.html" class="btn btn-secondary">Back to Home</a>
+        <a href="index.html" class="btn btn-secondary">Back to Home</a>
 
         <!-- Footer -->
         <p class="footer-text">
@@ -549,26 +549,13 @@
                     throw new Error(data.message || 'Failed to reset password');
                 }
 
-                // Success!
-                showMessage('✅ Password reset successfully! You can now log in with your new password.', 'success');
+                // Success! Redirect to success page
+                showMessage('✅ Password reset successfully! Redirecting...', 'success');
+                submitBtn.innerHTML = '<span class="loading-spinner"></span>Redirecting...';
                 
-                // Disable form
-                document.getElementById('newPassword').disabled = true;
-                document.getElementById('confirmPassword').disabled = true;
-                
-                // Change button to redirect to login
                 setTimeout(() => {
-                    submitBtn.innerHTML = 'Open HeyChef App';
-                    submitBtn.disabled = false;
-                    submitBtn.onclick = () => {
-                        // Deep link to open the app
-                        window.location.href = 'heychef://login';
-                        // Fallback to home page after a delay
-                        setTimeout(() => {
-                            window.location.href = '../index.html';
-                        }, 1000);
-                    };
-                }, 2000);
+                    window.location.href = '。/reset-success.html';
+                }, 1500);
 
             } catch (error) {
                 showMessage(error.message || 'An error occurred. Please try again.', 'error');
