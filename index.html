@@ -3,276 +3,619 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YHALLC - Connecting Real People in the AI World</title>
-    <meta name="description" content="YHALLC develops mobile apps that connect real people in this AI world. Meet HeyChef, our first product.">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="HeyChef - Connect with professional private chefs for personalized culinary experiences">
+    <meta name="keywords" content="private chef, personal chef, cooking services, catering, culinary experiences">
+    <meta name="author" content="HeyChef">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/web/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="assets/web/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/web/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/web/icon-512.png">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="HeyChef - Your Personal Chef Connection">
+    <meta property="og:description" content="Connect with professional private chefs for personalized culinary experiences">
+    <meta property="og:image" content="assets/heychef-logo.png">
+    
+    <title>HeyChef - Your Personal Chef Connection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #FF8C00;
+            --secondary-color: #FFA500;
+            --dark-bg: #1a1a1a;
+            --light-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --accent: #FF6B35;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent) 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 20px;
+            background: var(--light-bg);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Screenshots Section */
+        .screenshots {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .screenshots-scroll {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 40px 0;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .screenshots-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .screenshots-scroll::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        .screenshots-scroll::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .screenshot-item {
+            min-width: 280px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.05);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 20px;
+            background: white;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 30px;
+            box-shadow: 0 5px 20px rgba(255, 140, 0, 0.3);
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .step p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 20px;
+            background: var(--dark-bg);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.3rem;
+            background: rgba(255,255,255,0.15);
+            padding: 20px 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateX(10px);
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.8;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2>YHALLC</h2>
-            </div>
-            <div class="nav-menu">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#product" class="nav-link">HeyChef</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
-
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Connecting <span class="gradient-text">Real People</span><br>
-                    in the AI World
-                </h1>
-                <p class="hero-description">
-                    YHALLC develops innovative mobile platforms that bring authentic human connections 
-                    to life in our increasingly digital world.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#product" class="btn btn-primary">Discover HeyChef</a>
-                    <a href="#about" class="btn btn-secondary">Learn More</a>
-                </div>
+        <div class="hero-content">
+            <div class="logo">
+                <img src="../assets/heychef-logo.png" alt="HeyChef Logo">
             </div>
-            <div class="hero-visual">
-                <div class="floating-card card-1">
-                    <i class="fas fa-mobile-alt"></i>
-                    <span>Mobile Apps</span>
-                </div>
-                <div class="floating-card card-2">
-                    <i class="fas fa-users"></i>
-                    <span>Real Connections</span>
-                </div>
-                <div class="floating-card card-3">
-                    <i class="fas fa-robot"></i>
-                    <span>AI World</span>
-                </div>
+            <h1>HeyChef</h1>
+            <p class="tagline">Connect with Professional Private Chefs for Unforgettable Culinary Experiences</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Download App</a>
+                <a href="#contact" class="btn btn-secondary">Contact Us</a>
             </div>
-        </div>
-        <div class="hero-bg">
-            <div class="gradient-orb orb-1"></div>
-            <div class="gradient-orb orb-2"></div>
-            <div class="gradient-orb orb-3"></div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- Features Section -->
+    <section class="features">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About YHALLC</h2>
-                <p class="section-subtitle">Bridging the gap between technology and human connection</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>
-                        In a world increasingly dominated by artificial intelligence and digital interactions, 
-                        YHALLC stands as a beacon of authentic human connection. We believe that technology 
-                        should enhance, not replace, the meaningful relationships that make us human.
-                    </p>
-                    <p>
-                        Our mobile applications serve as platforms that bring real people together, 
-                        fostering genuine connections in an AI-driven landscape. We're not just 
-                        building apps – we're building bridges between hearts and minds.
-                    </p>
-                    <div class="stats">
-                        <div class="stat">
-                            <h4>100%</h4>
-                            <p>Human-Focused</p>
-                        </div>
-                        <div class="stat">
-                            <h4>∞</h4>
-                            <p>Connections</p>
-                        </div>
-                        <div class="stat">
-                            <h4>1</h4>
-                            <p>Mission</p>
-                        </div>
-                    </div>
+            <h2 class="section-title">Why Choose HeyChef?</h2>
+            <p class="section-subtitle">Experience the future of personalized dining</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🍳</div>
+                    <h3>Professional Chefs</h3>
+                    <p>Connect with verified, experienced private chefs specializing in various cuisines</p>
                 </div>
-                <div class="about-visual">
-                    <div class="connection-diagram">
-                        <div class="person person-1">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="connection-line"></div>
-                        <div class="app-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <div class="connection-line"></div>
-                        <div class="person person-2">
-                            <i class="fas fa-user"></i>
-                        </div>
-                    </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Easy Booking</h3>
+                    <p>Browse chef profiles, view their specialties, and book directly through the app</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🍽️</div>
+                    <h3>Custom Menus</h3>
+                    <p>Work with chefs to create personalized menus for any occasion</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>Ratings & Reviews</h3>
+                    <p>Read authentic reviews from other customers to make informed decisions</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Direct Messaging</h3>
+                    <p>Communicate directly with chefs to discuss your culinary vision</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Real-time Updates</h3>
+                    <p>Get instant notifications about booking confirmations and chef messages</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Product Section -->
-    <section id="product" class="product">
+    <!-- Screenshots Section -->
+    <section class="screenshots">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">HeyChef</h2>
-                <p class="section-subtitle">Our first product - Where culinary passion meets community</p>
+            <h2 class="section-title">See HeyChef in Action</h2>
+            <p class="section-subtitle">Beautiful interface, seamless experience</p>
+            
+            <div class="screenshots-scroll">
+                <div class="screenshot-item">
+                    <img src="assets/1.png" alt="Home Screen">
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/2.png" alt="Chef Profile">
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/3.png" alt="Booking">
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/4.png" alt="Profile">
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/5.png" alt="Cuisines">
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/6.png" alt="Bookings">
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/7.png" alt="Search">
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/8.png" alt="Messages">
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/9.png" alt="Profile">
+                </div>
             </div>
-            <div class="product-content">
-                <div class="product-visual">
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <div class="app-preview">
-                                <div class="app-header">
-                                    <h3>HeyChef</h3>
-                                    <div class="status-dot"></div>
-                                </div>
-                                <div class="app-content">
-                                    <div class="recipe-card">
-                                        <div class="recipe-image"></div>
-                                        <h4>Spaghetti Carbonara</h4>
-                                        <p>Shared by Maria</p>
-                                    </div>
-                                    <div class="recipe-card">
-                                        <div class="recipe-image"></div>
-                                        <h4>Chocolate Cake</h4>
-                                        <p>Shared by John</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Get started in three simple steps</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Browse Chefs</h3>
+                    <p>Explore profiles of professional chefs in your area, view their specialties, ratings, and sample menus</p>
                 </div>
-                <div class="product-text">
-                    <h3>Connect Through Culinary Art</h3>
-                    <p>
-                        HeyChef is more than just a recipe app – it's a community where food lovers 
-                        share their passion, learn from each other, and build lasting relationships 
-                        through the universal language of cooking.
-                    </p>
-                    <div class="features">
-                        <div class="feature">
-                            <i class="fas fa-share-alt"></i>
-                            <div>
-                                <h4>Share Recipes</h4>
-                                <p>Upload and share your favorite recipes with the community</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-comments"></i>
-                            <div>
-                                <h4>Real Conversations</h4>
-                                <p>Engage in meaningful discussions about food and cooking</p>
-                            </div>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-heart"></i>
-                            <div>
-                                <h4>Build Connections</h4>
-                                <p>Connect with fellow food enthusiasts and build lasting friendships</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="coming-soon">
-                        <i class="fas fa-rocket"></i>
-                        <span>Coming Soon to App Stores</span>
-                    </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Book Your Experience</h3>
+                    <p>Select your preferred chef, choose a date and time, and customize your menu preferences</p>
                 </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Enjoy & Review</h3>
+                    <p>Sit back and enjoy an unforgettable culinary experience, then share your feedback</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">🔒</div>
+                <div class="stat-label">Secure & Verified</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">⚡</div>
+                <div class="stat-label">Instant Booking</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">💯</div>
+                <div class="stat-label">Quality Guaranteed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">🌟</div>
+                <div class="stat-label">Premium Experience</div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="section-subtitle">Ready to connect? We'd love to hear from you</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Email Us</h4>
-                            <a href="mailto:heychef@yhallc.com">heychef@yhallc.com</a>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Company</h4>
-                            <p>YHALLC</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>Platform</h4>
-                            <p>Mobile Applications</p>
-                        </div>
-                    </div>
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2>Get In Touch</h2>
+            <p>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:heychef@yhallc.com">heychef@yhallc.com</a>
                 </div>
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Your Message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
-            </div>
+            </div>  
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <h3>YHALLC</h3>
-                    <p>Connecting real people in the AI world</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#about">About</a>
-                    <a href="#product">HeyChef</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-social">
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 YHALLC. All rights reserved.</p>
-            </div>
+            <p>&copy; 2025 HeyChef. All rights reserved.</p>
+            <p style="margin-top: 10px; opacity: 0.6;">Built with ❤️ for food lovers everywhere</p>
         </div>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
+
