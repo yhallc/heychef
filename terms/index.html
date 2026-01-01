@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HeyChef Terms of Service - Rules and guidelines for using our platform">
+    <meta name="author" content="HeyChef">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+    
+    <title>Terms of Service - HeyChef</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #FF8C00;
+            --secondary-color: #FFA500;
+            --dark-bg: #1a1a1a;
+            --light-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --accent: #FF6B35;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background: #f9f9f9;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 50%;
+            padding: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .last-updated {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        .nav-back {
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-back a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-back a:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+        }
+
+        .nav-back a::before {
+            content: '←';
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.08);
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px 25px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .toc ol {
+            list-style: none;
+            counter-reset: toc-counter;
+        }
+
+        .toc li {
+            margin: 8px 0;
+            counter-increment: toc-counter;
+        }
+
+        .toc li::before {
+            content: counter(toc-counter) ". ";
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .toc a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .toc a:hover {
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 40px;
+            scroll-margin-top: 80px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h3 {
+            color: var(--text-dark);
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+        }
+
+        h4 {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            margin: 20px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+            color: var(--text-dark);
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Highlight Boxes */
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .important-box {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .contact-box p {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .contact-box a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            .toc {
+                padding: 15px 20px;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Print Styles */
+        @media print {
+            .nav-back, .footer {
+                display: none;
+            }
+            
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-container">
+            <img src="../assets/heychef-logo.png" alt="HeyChef Logo">
+        </div>
+        <h1>Terms of Service</h1>
+        <p class="last-updated">Last Updated: December 31, 2025</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-back">
+        <a href="../index.html">Back to Home</a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Introduction -->
+        <div class="content-section">
+            <p>By accessing or using the HeyChef mobile application ("App," "Service," "we," "us," or "our"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the App.</p>
+            
+            <div class="warning-box">
+                <p><strong>Important:</strong> Please read these terms carefully before using HeyChef. These terms contain important information about your legal rights, including mandatory arbitration and class action waiver provisions.</p>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ol>
+                <li><a href="#service">Description of Service</a></li>
+                <li><a href="#eligibility">Eligibility</a></li>
+                <li><a href="#accounts">User Accounts</a></li>
+                <li><a href="#chef-services">Chef Services</a></li>
+                <li><a href="#bookings">Bookings and Payments</a></li>
+                <li><a href="#cancellation">Cancellation and Refund Policy</a></li>
+                <li><a href="#conduct">User Conduct</a></li>
+                <li><a href="#intellectual">Intellectual Property</a></li>
+                <li><a href="#reviews">Reviews and Ratings</a></li>
+                <li><a href="#disclaimers">Disclaimers</a></li>
+                <li><a href="#liability">Limitation of Liability</a></li>
+                <li><a href="#indemnification">Indemnification</a></li>
+                <li><a href="#disputes">Dispute Resolution</a></li>
+                <li><a href="#food-safety">Food Safety and Liability</a></li>
+                <li><a href="#contact-info">Contact Information</a></li>
+            </ol>
+        </div>
+
+        <!-- Description of Service -->
+        <div id="service" class="content-section">
+            <h2>1. Description of Service</h2>
+            <p>HeyChef is a marketplace platform that connects users seeking personal chef services ("Users" or "Clients") with professional chefs ("Chefs" or "Service Providers"). We facilitate bookings, communications, and payments but <strong>do not provide chef services directly</strong>.</p>
+            
+            <div class="info-box">
+                <p><strong>Key Point:</strong> HeyChef is a technology platform only. We are not responsible for the actual chef services provided.</p>
+            </div>
+        </div>
+
+        <!-- Eligibility -->
+        <div id="eligibility" class="content-section">
+            <h2>2. Eligibility</h2>
+            <p>To use HeyChef, you must:</p>
+            <ul>
+                <li>Be at least <strong>18 years old</strong></li>
+                <li>Have the legal capacity to enter into binding contracts</li>
+                <li>Not be prohibited from using the Service under applicable laws</li>
+                <li>Provide accurate and complete registration information</li>
+            </ul>
+        </div>
+
+        <!-- User Accounts -->
+        <div id="accounts" class="content-section">
+            <h2>3. User Accounts</h2>
+
+            <h3>3.1 Account Creation</h3>
+            <ul>
+                <li>You must create an account to access most features</li>
+                <li>You are responsible for maintaining account security</li>
+                <li>You must provide accurate, current information</li>
+                <li>One person or entity may not maintain multiple accounts</li>
+            </ul>
+
+            <h3>3.2 Account Types</h3>
+            <ul>
+                <li><strong>User/Client Account:</strong> For booking chef services</li>
+                <li><strong>Chef Account:</strong> For offering chef services (requires additional verification)</li>
+            </ul>
+
+            <h3>3.3 Account Security</h3>
+            <ul>
+                <li>Keep your password confidential</li>
+                <li>Notify us immediately of unauthorized access</li>
+                <li>You are responsible for all activities under your account</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Security Notice:</strong> Never share your account credentials. You are liable for all activities performed using your account.</p>
+            </div>
+        </div>
+
+        <!-- Chef Services -->
+        <div id="chef-services" class="content-section">
+            <h2>4. Chef Services</h2>
+
+            <h3>4.1 For Chefs</h3>
+            <p>As a Chef on HeyChef, you agree to:</p>
+            <ul>
+                <li>Provide accurate information about your services, qualifications, and availability</li>
+                <li>Maintain appropriate licenses, permits, and insurance required in your jurisdiction</li>
+                <li>Deliver services professionally and as described</li>
+                <li>Comply with all food safety and health regulations</li>
+                <li>Respond promptly to booking requests and messages</li>
+                <li>Honor confirmed bookings or provide reasonable notice of cancellation</li>
+            </ul>
+
+            <h3>4.2 Chef Independence</h3>
+            <p>Chefs are <strong>independent contractors</strong>, not employees of HeyChef. We do not control how chefs provide their services. Chefs set their own pricing, availability, and service terms.</p>
+        </div>
+
+        <!-- Bookings and Payments -->
+        <div id="bookings" class="content-section">
+            <h2>5. Bookings and Payments</h2>
+
+            <h3>5.1 Booking Process</h3>
+            <ul>
+                <li>Users submit booking requests to Chefs</li>
+                <li>Chefs can accept or decline requests</li>
+                <li>A binding contract forms when a Chef accepts a booking</li>
+                <li>The contract is between the User and Chef, <strong>not HeyChef</strong></li>
+            </ul>
+
+            <h3>5.2 Pricing</h3>
+            <ul>
+                <li>Chefs set their own prices</li>
+                <li>All prices displayed in USD (or local currency)</li>
+                <li>Additional costs (ingredients, travel) must be disclosed upfront</li>
+            </ul>
+
+            <h3>5.3 Payment Processing</h3>
+            <ul>
+                <li>Payments are processed through our secure payment provider</li>
+                <li>We may charge service fees on transactions (disclosed at booking)</li>
+                <li>Service fees are <strong>non-refundable</strong> except as required by law</li>
+            </ul>
+        </div>
+
+        <!-- Cancellation Policy -->
+        <div id="cancellation" class="content-section">
+            <h2>6. Cancellation and Refund Policy</h2>
+
+            <h3>6.1 User Cancellations</h3>
+            <ul>
+                <li><strong>More than 48 hours before service:</strong> Full refund</li>
+                <li><strong>24-48 hours before service:</strong> 50% refund</li>
+                <li><strong>Less than 24 hours before service:</strong> No refund</li>
+            </ul>
+
+            <h3>6.2 Chef Cancellations</h3>
+            <ul>
+                <li>Chefs should provide reasonable notice</li>
+                <li>Late cancellations by Chefs result in full user refund</li>
+                <li>Repeated cancellations may result in account suspension</li>
+            </ul>
+
+            <div class="info-box">
+                <p><strong>Disputes:</strong> Contact support@heychef.com for cancellation disputes. We will review on a case-by-case basis.</p>
+            </div>
+        </div>
+
+        <!-- User Conduct -->
+        <div id="conduct" class="content-section">
+            <h2>7. User Conduct</h2>
+
+            <h3>You agree NOT to:</h3>
+            <ul>
+                <li>Violate any laws or regulations</li>
+                <li>Infringe on others' intellectual property rights</li>
+                <li>Harass, abuse, or harm other users</li>
+                <li>Post false, misleading, or defamatory content</li>
+                <li>Attempt to bypass payment systems or fees</li>
+                <li>Use the Service for any illegal purpose</li>
+                <li>Share your account credentials</li>
+                <li>Scrape or harvest data from the Service</li>
+                <li>Upload viruses or malicious code</li>
+                <li>Impersonate others or misrepresent affiliations</li>
+                <li>Attempt to circumvent the platform to transact directly</li>
+            </ul>
+
+            <div class="important-box">
+                <p><strong>Violation Warning:</strong> Violating these conduct rules may result in immediate account suspension or termination.</p>
+            </div>
+        </div>
+
+        <!-- Intellectual Property -->
+        <div id="intellectual" class="content-section">
+            <h2>8. Intellectual Property</h2>
+
+            <h3>8.1 HeyChef's Rights</h3>
+            <ul>
+                <li>The App and its content are owned by HeyChef</li>
+                <li>Our trademarks, logos, and branding are protected</li>
+                <li>You may not use our intellectual property without permission</li>
+            </ul>
+
+            <h3>8.2 User Content</h3>
+            <ul>
+                <li>You retain ownership of content you post (photos, reviews, messages)</li>
+                <li>You grant us a license to use, display, and distribute your content</li>
+                <li>You represent that you have rights to content you post</li>
+                <li>We may remove content that violates these Terms</li>
+            </ul>
+        </div>
+
+        <!-- Reviews and Ratings -->
+        <div id="reviews" class="content-section">
+            <h2>9. Reviews and Ratings</h2>
+            <ul>
+                <li>Users can review and rate Chefs after service completion</li>
+                <li>Reviews must be honest, accurate, and based on personal experience</li>
+                <li>We may remove reviews that violate our policies</li>
+                <li>Chefs cannot review their own services</li>
+                <li>False or fraudulent reviews are prohibited</li>
+            </ul>
+        </div>
+
+        <!-- Disclaimers -->
+        <div id="disclaimers" class="content-section">
+            <h2>10. Disclaimers</h2>
+
+            <h3>10.1 Service "AS IS"</h3>
+            <p>The Service is provided <strong>"AS IS"</strong> and <strong>"AS AVAILABLE"</strong>. We make no warranties about reliability, accuracy, or availability. Your use of the Service is at your own risk.</p>
+
+            <h3>10.2 No Guarantee of Quality</h3>
+            <ul>
+                <li>We do not guarantee the quality, safety, or legality of chef services</li>
+                <li>We do not guarantee the accuracy of chef profiles or listings</li>
+                <li>Users interact with Chefs at their own risk</li>
+            </ul>
+
+            <div class="warning-box">
+                <p><strong>Disclaimer:</strong> Any background checks or verifications are for informational purposes only. We do not guarantee chef qualifications, safety, or suitability.</p>
+            </div>
+        </div>
+
+        <!-- Limitation of Liability -->
+        <div id="liability" class="content-section">
+            <h2>11. Limitation of Liability</h2>
+
+            <div class="important-box">
+                <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW:</strong></p>
+                <ul>
+                    <li>HeyChef is not liable for any indirect, incidental, consequential, or punitive damages</li>
+                    <li>Our total liability shall not exceed the fees you paid to us in the past 12 months</li>
+                    <li>We are not responsible for disputes between Users and Chefs</li>
+                    <li>We are not liable for any injury, illness, or damage resulting from chef services</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Indemnification -->
+        <div id="indemnification" class="content-section">
+            <h2>12. Indemnification</h2>
+            <p>You agree to indemnify and hold harmless HeyChef, its officers, directors, employees, and agents from any claims, losses, damages, or expenses (including legal fees) arising from:</p>
+            <ul>
+                <li>Your use of the Service</li>
+                <li>Your violation of these Terms</li>
+                <li>Your violation of any rights of another person or entity</li>
+                <li>Your content or actions on the platform</li>
+            </ul>
+        </div>
+
+        <!-- Dispute Resolution -->
+        <div id="disputes" class="content-section">
+            <h2>13. Dispute Resolution</h2>
+
+            <h3>13.1 Informal Resolution</h3>
+            <p>Contact us first at <strong>support@heychef.com</strong>. We will attempt to resolve disputes informally.</p>
+
+            <h3>13.2 Arbitration</h3>
+            <ul>
+                <li>Any disputes will be resolved through binding arbitration</li>
+                <li>You waive your right to a jury trial</li>
+                <li>Class action lawsuits are not permitted</li>
+            </ul>
+        </div>
+
+        <!-- Food Safety -->
+        <div id="food-safety" class="content-section">
+            <h2>14. Food Safety and Liability</h2>
+
+            <h3>14.1 Chef Responsibilities</h3>
+            <p>Chefs are solely responsible for:</p>
+            <ul>
+                <li>Food safety and hygiene practices</li>
+                <li>Compliance with health codes and regulations</li>
+                <li>Proper food handling and storage</li>
+                <li>Allergen disclosure and management</li>
+                <li>Obtaining necessary permits and insurance</li>
+            </ul>
+
+            <h3>14.2 User Responsibilities</h3>
+            <p>Users are responsible for:</p>
+            <ul>
+                <li>Disclosing dietary restrictions and allergies</li>
+                <li>Ensuring safe and clean workspace for Chefs</li>
+                <li>Verifying Chef credentials and reviews</li>
+            </ul>
+
+            <h3>14.3 HeyChef's Role</h3>
+            <div class="important-box">
+                <p><strong>Important:</strong> We are a technology platform only. We do not inspect, supervise, or control chef services. We are not responsible for food-borne illness or allergic reactions. Users and Chefs assume all risks of food service transactions.</p>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div id="contact-info" class="content-section">
+            <div class="contact-box">
+                <h3>15. Contact Information</h3>
+                <p>For questions about these Terms, contact us:</p>
+                <p><strong>Email:</strong> <a href="mailto:heychef@yhallc.com">heychef@yhallc.com</a></p>
+            </div>
+        </div>
+
+        <!-- Acknowledgment -->
+        <div class="content-section">
+            <div class="info-box">
+                <p><strong>By using HeyChef, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../privacy/index.html">Privacy Policy</a>
+            <a href="index.html">Terms of Service</a>
+            <a href="mailto:heychef@yhallc.com">Contact</a>
+        </div>
+        <p>&copy; 2025 HeyChef. All rights reserved.</p>
+    </div>
+</body>
+</html>
+
