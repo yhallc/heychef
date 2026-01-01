@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HeyChef Account Deletion - Request to delete your account and data">
+    <meta name="author" content="HeyChef">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+    
+    <title>Delete Account - HeyChef</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #FF8C00;
+            --secondary-color: #FFA500;
+            --dark-bg: #1a1a1a;
+            --light-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --accent: #FF6B35;
+            --border-color: #e0e0e0;
+            --success-color: #4CAF50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            background: #f9f9f9;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 50%;
+            padding: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        .nav-back {
+            background: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-back a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-back a:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+        }
+
+        .nav-back a::before {
+            content: '←';
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.08);
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h3 {
+            color: var(--text-dark);
+            font-size: 1.4rem;
+            margin: 25px 0 15px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        ul {
+            margin: 15px 0 15px 30px;
+            color: var(--text-dark);
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        /* Highlight Boxes */
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .danger-box {
+            background: #ffebee;
+            border-left: 4px solid var(--danger-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .contact-box p {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .contact-box a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 2px 0;
+            border-bottom: 2px solid white;
+            transition: all 0.3s ease;
+        }
+
+        .contact-box a:hover {
+            opacity: 0.8;
+        }
+
+        .email-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary-color);
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .email-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Steps */
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+            margin: 30px 0;
+            padding: 0;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+            padding-left: 70px;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            .steps li {
+                padding-left: 65px;
+            }
+
+            .steps li::before {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-container">
+            <img src="../assets/heychef-logo.png" alt="HeyChef Logo">
+        </div>
+        <h1>Delete Your Account</h1>
+        <p class="subtitle">We're sorry to see you go</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-back">
+        <a href="../index.html">Back to Home</a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Introduction -->
+        <div class="content-section">
+            <p>If you wish to delete your HeyChef account and all associated data, we're here to help. Please read the information below carefully before proceeding.</p>
+        </div>
+
+        <!-- Warning -->
+        <div class="danger-box">
+            <h3 style="margin-top: 0; color: var(--danger-color);">⚠️ Important: This Action Cannot Be Undone</h3>
+            <p style="margin-bottom: 0;"><strong>Deleting your account is permanent.</strong> Once deleted, you will lose access to:</p>
+            <ul style="margin-bottom: 0;">
+                <li>Your profile and account information</li>
+                <li>All booking history and records</li>
+                <li>Messages and conversations</li>
+                <li>Reviews and ratings (given and received)</li>
+                <li>Saved posts and favorite cuisines</li>
+                <li>Chef profile and business data (if you're a chef)</li>
+            </ul>
+        </div>
+
+        <!-- What Gets Deleted -->
+        <div class="content-section">
+            <h2>What Information Will Be Deleted</h2>
+            <p>When you delete your account, the following data will be permanently removed from our systems within 30 days:</p>
+            <ul>
+                <li><strong>Personal Information:</strong> Name, email, phone number, profile photo</li>
+                <li><strong>Account Data:</strong> Login credentials, preferences, settings</li>
+                <li><strong>User Content:</strong> Posts, photos, reviews, comments</li>
+                <li><strong>Messages:</strong> All chat conversations</li>
+                <li><strong>Booking Information:</strong> Past and future bookings</li>
+                <li><strong>Chef Data:</strong> Business profile, specialty dishes, availability (if applicable)</li>
+                <li><strong>Social Connections:</strong> Followers, following, likes</li>
+            </ul>
+        </div>
+
+        <!-- What Is Retained -->
+        <div class="content-section">
+            <h2>Information We May Retain</h2>
+            <p>For legal and business purposes, we may retain some information:</p>
+            <ul>
+                <li><strong>Transaction Records:</strong> Financial records for tax and legal compliance (up to 7 years)</li>
+                <li><strong>Legal Requirements:</strong> Data required by law or for ongoing legal matters</li>
+                <li><strong>Security Logs:</strong> Technical logs for fraud prevention and security</li>
+            </ul>
+            <p>This retained information is kept secure and will not be used for any other purposes.</p>
+        </div>
+
+        <!-- How to Delete -->
+        <div class="content-section">
+            <h2>How to Delete Your Account</h2>
+            
+            <h3>Method 1: In-App Deletion (Coming Soon)</h3>
+            <div class="info-box">
+                <p><strong>Future Update:</strong> We're working on adding an in-app account deletion feature. Once available, you'll be able to delete your account directly from the app settings.</p>
+            </div>
+
+            <h3>Method 2: Email Request (Current Method)</h3>
+            <p>To delete your account, please send an email request following these steps:</p>
+            
+            <ol class="steps">
+                <li>
+                    <strong>Send an email to:</strong> <a href="mailto:heychef@yhallc.com" style="color: var(--primary-color);">heychef@yhallc.com</a>
+                </li>
+                <li>
+                    <strong>Subject line:</strong> "Account Deletion Request"
+                </li>
+                <li>
+                    <strong>Include in your email:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Your full name</li>
+                        <li>Email address associated with your account</li>
+                        <li>Reason for deletion (optional but appreciated)</li>
+                        <li>Confirmation statement: "I understand this action is permanent and irreversible"</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>Verification:</strong> We may ask for additional verification to confirm account ownership and prevent unauthorized deletions
+                </li>
+                <li>
+                    <strong>Processing:</strong> Your account will be deleted within 30 days. You'll receive a confirmation email once completed
+                </li>
+            </ol>
+        </div>
+
+        <!-- Email Template -->
+        <div class="content-section">
+            <h2>Email Template</h2>
+            <div class="info-box">
+                <p><strong>Subject:</strong> Account Deletion Request</p>
+                <br>
+                <p>Dear HeyChef Support Team,</p>
+                <br>
+                <p>I would like to request the deletion of my HeyChef account.</p>
+                <br>
+                <p><strong>Account Information:</strong><br>
+                Name: [Your Full Name]<br>
+                Email: [Your Account Email]</p>
+                <br>
+                <p><strong>Reason (Optional):</strong> [Your reason for leaving]</p>
+                <br>
+                <p>I understand that this action is permanent and irreversible, and I will lose access to all my account data, bookings, and content.</p>
+                <br>
+                <p>Best regards,<br>
+                [Your Name]</p>
+            </div>
+        </div>
+
+        <!-- Alternatives -->
+        <div class="content-section">
+            <h2>Before You Delete</h2>
+            <p>If you're experiencing issues with the app, consider these alternatives:</p>
+            
+            <div class="warning-box">
+                <h3 style="margin-top: 0;">💡 Alternative Options</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Take a Break:</strong> You can simply stop using the app without deleting your account</li>
+                    <li><strong>Update Preferences:</strong> Adjust your notification settings or privacy options</li>
+                    <li><strong>Contact Support:</strong> Let us know if something isn't working right - we're here to help!</li>
+                    <li><strong>Update Profile:</strong> Change your profile visibility or personal information</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Response Time -->
+        <div class="content-section">
+            <h2>What Happens Next</h2>
+            <ul>
+                <li><strong>Acknowledgment:</strong> We'll confirm receipt of your request within 24-48 hours</li>
+                <li><strong>Verification:</strong> We may ask you to confirm your identity (typically within 2-3 business days)</li>
+                <li><strong>Processing:</strong> Once verified, your account will be scheduled for deletion</li>
+                <li><strong>Deletion:</strong> Your data will be permanently deleted within 30 days</li>
+                <li><strong>Confirmation:</strong> You'll receive a final email confirming the deletion is complete</li>
+            </ul>
+        </div>
+
+        <!-- Contact Box -->
+        <div class="contact-box">
+            <h3>Ready to Delete Your Account?</h3>
+            <p>Send us an email and we'll process your request promptly.</p>
+            <a href="mailto:heychef@yhallc.com?subject=Account%20Deletion%20Request&body=Dear%20HeyChef%20Support%20Team%2C%0A%0AI%20would%20like%20to%20request%20the%20deletion%20of%20my%20HeyChef%20account.%0A%0AAccount%20Information%3A%0AName%3A%20%5BYour%20Full%20Name%5D%0AEmail%3A%20%5BYour%20Account%20Email%5D%0A%0AReason%20(Optional)%3A%20%5BYour%20reason%20for%20leaving%5D%0A%0AI%20understand%20that%20this%20action%20is%20permanent%20and%20irreversible%2C%20and%20I%20will%20lose%20access%20to%20all%20my%20account%20data%2C%20bookings%2C%20and%20content.%0A%0ABest%20regards%2C%0A%5BYour%20Name%5D" class="email-button">
+                Send Deletion Request
+            </a>
+            <p style="margin-top: 30px; font-size: 1rem;">
+                <strong>Email:</strong> <a href="mailto:heychef@yhallc.com">heychef@yhallc.com</a>
+            </p>
+        </div>
+
+        <!-- FAQ -->
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <h3>How long does the deletion process take?</h3>
+            <p>Once we verify your identity, your account will be permanently deleted within 30 days.</p>
+
+            <h3>Can I recover my account after deletion?</h3>
+            <p>No, account deletion is permanent and cannot be undone. All your data will be permanently removed from our systems.</p>
+
+            <h3>What happens to my active bookings?</h3>
+            <p>If you have active bookings, please cancel or complete them before requesting account deletion. Contact the other party (chef or client) to notify them.</p>
+
+            <h3>Will chefs I've worked with see my reviews?</h3>
+            <p>Your reviews will be deleted along with your account. This means ratings and reviews you've left will be removed.</p>
+
+            <h3>What if I'm a chef with active clients?</h3>
+            <p>Please ensure all bookings are completed and communicate with your clients before deleting your account. You may want to export important information first.</p>
+
+            <h3>Can I just deactivate my account instead?</h3>
+            <p>Currently, we only offer permanent deletion. If you'd like a temporary deactivation feature, please let us know in your deletion request email.</p>
+
+            <h3>Will my payment information be deleted?</h3>
+            <p>We don't store your full payment information. Transaction records may be retained for legal and tax purposes (up to 7 years) but payment card details are not stored by us.</p>
+        </div>
+
+        <!-- Privacy Reference -->
+        <div class="content-section">
+            <div class="info-box">
+                <p><strong>Learn more about how we handle your data:</strong></p>
+                <p><a href="../privacy/index.html" style="color: var(--primary-color); text-decoration: underline;">Privacy Policy</a> | <a href="terms.html" style="color: var(--primary-color); text-decoration: underline;">Terms of Service</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../privacy/index.html">Privacy Policy</a>
+            <a href="../terms/index.html">Terms of Service</a>
+            <a href="./index.html">Delete Account</a>
+            <a href="mailto:heychef@yhallc.com">Contact</a>
+        </div>
+        <p>&copy; 2025 HeyChef. All rights reserved.</p>
+    </div>
+</body>
+</html>
+
