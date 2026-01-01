@@ -199,7 +199,7 @@
             font-size: 1.1rem;
         }
 
-        .contact-box a {
+        .contact-box p a {
             color: white;
             text-decoration: none;
             font-weight: 600;
@@ -209,27 +209,29 @@
             transition: all 0.3s ease;
         }
 
-        .contact-box a:hover {
+        .contact-box p a:hover {
             opacity: 0.8;
         }
 
         .email-button {
             display: inline-block;
-            background: white;
-            color: var(--primary-color);
+            background: white !important;
+            color: var(--primary-color) !important;
             padding: 15px 40px;
             border-radius: 50px;
-            text-decoration: none;
+            text-decoration: none !important;
             font-weight: 700;
             font-size: 1.1rem;
             margin-top: 20px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-bottom: none !important;
         }
 
         .email-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            opacity: 1 !important;
         }
 
         /* Steps */
@@ -414,12 +416,12 @@
                 </li>
                 <li>
                     <strong>Include in your email:</strong>
-                    <ul style="margin-top: 10px;">
-                        <li>Your full name</li>
-                        <li>Email address associated with your account</li>
-                        <li>Reason for deletion (optional but appreciated)</li>
-                        <li>Confirmation statement: "I understand this action is permanent and irreversible"</li>
-                    </ul>
+                    <div style="margin-top: 10px; margin-left: 0;">
+                        • Your full name<br>
+                        • Email address associated with your account<br>
+                        • Reason for deletion (optional but appreciated)<br>
+                        • Confirmation statement: "I understand this action is permanent and irreversible"
+                    </div>
                 </li>
                 <li>
                     <strong>Verification:</strong> We may ask for additional verification to confirm account ownership and prevent unauthorized deletions
