@@ -388,15 +388,35 @@
         }
 
         /* Footer */
-        footer {
+        /* Footer */
+        .footer {
             background: var(--dark-bg);
             color: white;
             padding: 40px 20px;
             text-align: center;
         }
 
-        footer p {
-            opacity: 0.8;
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer p {
+            color: #999;
+            font-size: 0.9rem;
         }
 
         /* Animations */
@@ -614,12 +634,16 @@
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 HeyChef. All rights reserved.</p>
-            <p style="margin-top: 10px; opacity: 0.6;">Built with ❤️ for food lovers everywhere</p>
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="./privacy/index.html">Privacy Policy</a>
+            <a href="./terms/index.html">Terms of Service</a>
+            <a href="mailto:heychef@yhallc.com">Contact</a>
         </div>
-    </footer>
+        <p>&copy; 2025 HeyChef. All rights reserved.</p>
+    </div>
 </body>
 </html>
 
