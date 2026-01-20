@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting to HeyChef...</title>
+  <script>
+    // Get URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const status = params.get('status');
+    const target = params.get('target');
+    
+    // Build deep link URL
+    let deepLink = 'heychef://settings/' + target;
+    if (status === 'success') {
+      deepLink += '?stripe_success=true';
+    } else if (status === 'refresh') {
+      deepLink += '?stripe_refresh=true';
+    }
+    
+    // Redirect to app
+    window.location.href = deepLink;
+    
+    // Fallback: show message if redirect doesn't work
+    setTimeout(() => {
+      document.body.innerHTML = `
+        <div style="text-align: center; padding: 40px; font-family: -apple-system, sans-serif;">
+          <h2>Redirecting to HeyChef App...</h2>
+          <p>If you're not redirected automatically, <a href="${deepLink}">click here</a></p>
+          <p style="margin-top: 20px; color: #666;">Or open the HeyChef app manually.</p>
+        </div>
+      `;
+    }, 2000);
+  </script>
+</head>
+<body>
+  <div style="text-align: center; padding: 40px; font-family: -apple-system, sans-serif;">
+    <h2>Completing setup...</h2>
+    <p>Please wait while we redirect you back to HeyChef.</p>
+  </div>
+</body>
+</html>
