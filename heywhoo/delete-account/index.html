@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HeyWhoo Account Deletion - Request to delete your account and data">
+    <meta name="author" content="HeyWhoo">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+    
+    <title>Delete Account - HeyWhoo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #1a1a2e;
+            --secondary-purple: #252541;
+            --accent-yellow: #FFE500;
+            --accent-pink: #FF3E9D;
+            --accent-cyan: #00D9FF;
+            --accent-green: #00FF88;
+            --text-light: #ffffff;
+            --text-gray: #b8b8d1;
+            --danger-color: #FF3E9D;
+            --warning-color: #FFE500;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--accent-pink);
+        }
+
+        .logo-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(255, 62, 157, 0.3);
+            border: 2px solid var(--accent-pink);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 15px rgba(255, 62, 157, 0.5));
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        .nav-back {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-back a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .nav-back a:hover {
+            color: var(--accent-yellow);
+            transform: translateX(-5px);
+        }
+
+        .nav-back a::before {
+            content: '←';
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--accent-yellow);
+            font-size: 2rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 229, 0, 0.3);
+            font-weight: 800;
+        }
+
+        h3 {
+            color: var(--accent-cyan);
+            font-size: 1.5rem;
+            margin: 25px 0 15px 0;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-gray);
+            font-size: 1.05rem;
+        }
+
+        ul {
+            margin: 15px 0 15px 30px;
+            color: var(--text-gray);
+        }
+
+        li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: var(--text-light);
+            font-weight: 700;
+        }
+
+        /* Highlight Boxes */
+        .info-box {
+            background: rgba(0, 217, 255, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .warning-box {
+            background: rgba(255, 229, 0, 0.1);
+            border-left: 4px solid var(--warning-color);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .danger-box {
+            background: rgba(255, 62, 157, 0.1);
+            border-left: 4px solid var(--danger-color);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .danger-box h3 {
+            color: var(--danger-color);
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-cyan) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(255, 62, 157, 0.3);
+        }
+
+        .contact-box h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .contact-box p {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .email-button {
+            display: inline-block;
+            background: white !important;
+            color: var(--primary-purple) !important;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none !important;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: none !important;
+        }
+
+        .email-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Steps */
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+            margin: 30px 0;
+            padding: 0;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin: 20px 0;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            position: relative;
+            padding-left: 80px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-pink));
+            color: var(--primary-purple);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .footer p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+
+            .steps li {
+                padding-left: 70px;
+            }
+
+            .steps li::before {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+
+            .logo-container {
+                width: 80px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo-container">
+            <img src="../assets/heywhoo-logo.png" alt="HeyWhoo Logo">
+        </div>
+        <h1>Delete Your Account</h1>
+        <p class="subtitle">We're sorry to see you go</p>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-back">
+        <a href="../index.html">Back to Home</a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Introduction -->
+        <div class="content-section">
+            <p>If you wish to delete your HeyWhoo account and all associated data, we're here to help. Please read the information below carefully before proceeding.</p>
+        </div>
+
+        <!-- Warning -->
+        <div class="danger-box">
+            <h3 style="margin-top: 0;">⚠️ Important: This Action Cannot Be Undone</h3>
+            <p style="margin-bottom: 0;"><strong>Deleting your account is permanent.</strong> Once deleted, you will lose access to:</p>
+            <ul style="margin-bottom: 0;">
+                <li>Your profile and account information</li>
+                <li>All match history and chat records</li>
+                <li>Earned tokens and rewards</li>
+                <li>Ranking and leaderboard positions</li>
+                <li>Guess statistics and win/loss records</li>
+                <li>Messages and conversations with all matches</li>
+            </ul>
+        </div>
+
+        <!-- What Gets Deleted -->
+        <div class="content-section">
+            <h2>What Information Will Be Deleted</h2>
+            <p>When you delete your account, the following data will be permanently removed from our systems within 30 days:</p>
+            <ul>
+                <li><strong>Personal Information:</strong> Name, email, password, profile photo</li>
+                <li><strong>Account Data:</strong> Login credentials, preferences, settings</li>
+                <li><strong>Game Data:</strong> Match history, guess records, win/loss statistics</li>
+                <li><strong>Messages:</strong> All chat conversations with matches</li>
+                <li><strong>Tokens:</strong> All earned and daily tokens</li>
+                <li><strong>Rankings:</strong> Leaderboard positions and achievements</li>
+                <li><strong>Social Data:</strong> Connections and interactions with other players</li>
+            </ul>
+        </div>
+
+        <!-- What Is Retained -->
+        <div class="content-section">
+            <h2>Information We May Retain</h2>
+            <p>For legal and business purposes, we may retain some information:</p>
+            <ul>
+                <li><strong>Transaction Records:</strong> Purchase history for legal compliance (if applicable)</li>
+                <li><strong>Legal Requirements:</strong> Data required by law or for ongoing legal matters</li>
+                <li><strong>Security Logs:</strong> Technical logs for fraud prevention and security</li>
+                <li><strong>Anonymized Analytics:</strong> Aggregated, non-identifiable usage statistics</li>
+            </ul>
+            <p>This retained information is kept secure and will not be used for any other purposes.</p>
+        </div>
+
+        <!-- How to Delete -->
+        <div class="content-section">
+            <h2>How to Delete Your Account</h2>
+            
+            <h3>Method 1: In-App Deletion (Recommended)</h3>
+            <div class="info-box">
+                <p><strong>Coming Soon:</strong> We're working on adding an in-app account deletion feature. Once available, you'll be able to delete your account directly from the app settings.</p>
+            </div>
+
+            <h3>Method 2: Email Request (Current Method)</h3>
+            <p>To delete your account, please send an email request following these steps:</p>
+            
+            <ol class="steps">
+                <li>
+                    <strong>Send an email to:</strong> <a href="mailto:heywhoo@yhallc.com" style="color: var(--accent-cyan);">heywhoo@yhallc.com</a>
+                </li>
+                <li>
+                    <strong>Subject line:</strong> "Account Deletion Request"
+                </li>
+                <li>
+                    <strong>Include in your email:</strong>
+                    <div style="margin-top: 10px; margin-left: 0;">
+                        • Your full name<br>
+                        • Email address associated with your account<br>
+                        • Reason for deletion (optional but appreciated)<br>
+                        • Confirmation statement: "I understand this action is permanent and irreversible"
+                    </div>
+                </li>
+                <li>
+                    <strong>Verification:</strong> We may ask for additional verification to confirm account ownership and prevent unauthorized deletions
+                </li>
+                <li>
+                    <strong>Processing:</strong> Your account will be deleted within 30 days. You'll receive a confirmation email once completed
+                </li>
+            </ol>
+        </div>
+
+        <!-- Email Template -->
+        <div class="content-section">
+            <h2>Email Template</h2>
+            <div class="info-box">
+                <p><strong>Subject:</strong> Account Deletion Request</p>
+                <br>
+                <p>Dear HeyWhoo Support Team,</p>
+                <br>
+                <p>I would like to request the deletion of my HeyWhoo account.</p>
+                <br>
+                <p><strong>Account Information:</strong><br>
+                Name: [Your Full Name]<br>
+                Email: [Your Account Email]</p>
+                <br>
+                <p><strong>Reason (Optional):</strong> [Your reason for leaving]</p>
+                <br>
+                <p>I understand that this action is permanent and irreversible, and I will lose access to all my account data, matches, tokens, and rankings.</p>
+                <br>
+                <p>Best regards,<br>
+                [Your Name]</p>
+            </div>
+        </div>
+
+        <!-- Alternatives -->
+        <div class="content-section">
+            <h2>Before You Delete</h2>
+            <p>If you're experiencing issues with the app, consider these alternatives:</p>
+            
+            <div class="warning-box">
+                <h3 style="margin-top: 0; color: var(--warning-color);">💡 Alternative Options</h3>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>Take a Break:</strong> You can simply stop using the app without deleting your account</li>
+                    <li><strong>Update Preferences:</strong> Adjust your notification settings or privacy options</li>
+                    <li><strong>Contact Support:</strong> Let us know if something isn't working right - we're here to help!</li>
+                    <li><strong>Report Issues:</strong> Help us improve by reporting bugs or suggesting features</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Response Time -->
+        <div class="content-section">
+            <h2>What Happens Next</h2>
+            <ul>
+                <li><strong>Acknowledgment:</strong> We'll confirm receipt of your request within 24-48 hours</li>
+                <li><strong>Verification:</strong> We may ask you to confirm your identity (typically within 2-3 business days)</li>
+                <li><strong>Processing:</strong> Once verified, your account will be scheduled for deletion</li>
+                <li><strong>Deletion:</strong> Your data will be permanently deleted within 30 days</li>
+                <li><strong>Confirmation:</strong> You'll receive a final email confirming the deletion is complete</li>
+            </ul>
+        </div>
+
+        <!-- Contact Box -->
+        <div class="contact-box">
+            <h3>Ready to Delete Your Account?</h3>
+            <p>Send us an email and we'll process your request promptly.</p>
+            <a href="mailto:heywhoo@yhallc.com?subject=Account%20Deletion%20Request&body=Dear%20HeyWhoo%20Support%20Team%2C%0A%0AI%20would%20like%20to%20request%20the%20deletion%20of%20my%20HeyWhoo%20account.%0A%0AAccount%20Information%3A%0AName%3A%20%5BYour%20Full%20Name%5D%0AEmail%3A%20%5BYour%20Account%20Email%5D%0A%0AReason%20(Optional)%3A%20%5BYour%20reason%20for%20leaving%5D%0A%0AI%20understand%20that%20this%20action%20is%20permanent%20and%20irreversible%2C%20and%20I%20will%20lose%20access%20to%20all%20my%20account%20data%2C%20matches%2C%20tokens%2C%20and%20rankings.%0A%0ABest%20regards%2C%0A%5BYour%20Name%5D" class="email-button">
+                Send Deletion Request
+            </a>
+            <p style="margin-top: 30px; font-size: 1rem;">
+                <strong>Email:</strong> <a href="mailto:heywhoo@yhallc.com" style="color: white; text-decoration: underline;">heywhoo@yhallc.com</a>
+            </p>
+        </div>
+
+        <!-- FAQ -->
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <h3>How long does the deletion process take?</h3>
+            <p>Once we verify your identity, your account will be permanently deleted within 30 days.</p>
+
+            <h3>Can I recover my account after deletion?</h3>
+            <p>No, account deletion is permanent and cannot be undone. All your data will be permanently removed from our systems.</p>
+
+            <h3>What happens to my tokens?</h3>
+            <p>All tokens (daily, earned, and total) will be deleted along with your account and cannot be recovered or transferred.</p>
+
+            <h3>Will my chat partners see our messages?</h3>
+            <p>Your chat messages will be anonymized and removed from the system. Other users will not be able to view conversations with you.</p>
+
+            <h3>What happens to my leaderboard rankings?</h3>
+            <p>Your position on all leaderboards (Top Detectives, Most Fooled, Master Deceivers) will be removed.</p>
+
+            <h3>Can I just deactivate my account instead?</h3>
+            <p>Currently, we only offer permanent deletion. If you'd like a temporary deactivation feature, please let us know in your deletion request email.</p>
+
+            <h3>Will I still receive emails after deletion?</h3>
+            <p>No, once your account is deleted, you will be removed from all email lists and will not receive any further communications from HeyWhoo.</p>
+        </div>
+
+        <!-- Privacy Reference -->
+        <div class="content-section">
+            <div class="info-box">
+                <p><strong>Learn more about how we handle your data:</strong></p>
+                <p><a href="../privacy/index.html" style="color: var(--accent-cyan); text-decoration: underline;">Privacy Policy</a> | <a href="../terms/index.html" style="color: var(--accent-cyan); text-decoration: underline;">Terms of Service</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="../index.html">Home</a>
+            <a href="../privacy/index.html">Privacy Policy</a>
+            <a href="../terms/index.html">Terms of Service</a>
+            <a href="./index.html">Delete Account</a>
+            <a href="mailto:heywhoo@yhallc.com">Contact</a>
+        </div>
+        <p>&copy; 2026 HeyWhoo. All rights reserved.</p>
+    </div>
+</body>
+</html>

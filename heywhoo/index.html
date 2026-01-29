@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HeyWhoo - The ultimate social guessing game. Chat with humans or AI and guess who's who!">
+    <meta name="keywords" content="social game, AI chat, guessing game, mystery chat, human vs AI">
+    <meta name="author" content="HeyWhoo">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/icon-512.png">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="HeyWhoo - Guess Who? Human or AI?">
+    <meta property="og:description" content="The ultimate social guessing game. Chat with humans or AI and guess who's who!">
+    <meta property="og:image" content="./assets/heywhoo-logo.png">
+    
+    <title>HeyWhoo - Guess Who? Human or AI?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #1a1a2e;
+            --secondary-purple: #252541;
+            --accent-yellow: #FFE500;
+            --accent-pink: #FF3E9D;
+            --accent-cyan: #00D9FF;
+            --accent-green: #00FF88;
+            --gradient-bg: linear-gradient(135deg, #1a1a2e 0%, #252541 50%, #2d2d4a 100%);
+            --text-light: #ffffff;
+            --text-gray: #b8b8d1;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            overflow-x: hidden;
+            background: var(--primary-purple);
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--gradient-bg);
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .floating-particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -50px) scale(1.1); }
+            50% { transform: translate(-30px, 30px) scale(0.9); }
+            75% { transform: translate(30px, 50px) scale(1.05); }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            position: relative;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 40px rgba(255, 62, 157, 0.3));
+        }
+
+        .pulse-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 220px;
+            height: 220px;
+            border: 3px solid var(--accent-pink);
+            border-radius: 50%;
+            opacity: 0;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .tagline {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-gray);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .sub-tagline {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            display: inline-block;
+            padding: 10px 30px;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 30px;
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--accent-yellow);
+            color: var(--primary-purple);
+            box-shadow: 0 10px 30px rgba(255, 229, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 229, 0, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 3px solid var(--accent-pink);
+            box-shadow: 0 10px 30px rgba(255, 62, 157, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-pink);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 62, 157, 0.5);
+        }
+
+        /* Token Display */
+        .token-showcase {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .token-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .token-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-yellow);
+            box-shadow: 0 15px 40px rgba(255, 229, 0, 0.3);
+        }
+
+        .token-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .token-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-yellow);
+            margin-bottom: 5px;
+        }
+
+        .token-label {
+            font-size: 1rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 20px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.4rem;
+            color: var(--text-gray);
+            margin-bottom: 80px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 50px 35px;
+            border-radius: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 62, 157, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--accent-pink);
+            box-shadow: 0 20px 60px rgba(255, 62, 157, 0.4);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            line-height: 1.9;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Screenshots Section */
+        .screenshots {
+            padding: 100px 20px;
+            background: var(--gradient-bg);
+        }
+
+        .screenshots-scroll {
+            display: flex;
+            gap: 40px;
+            overflow-x: auto;
+            padding: 50px 20px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .screenshots-scroll::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        .screenshots-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .screenshots-scroll::-webkit-scrollbar-thumb {
+            background: var(--accent-yellow);
+            border-radius: 10px;
+        }
+
+        .screenshot-item {
+            min-width: 300px;
+            max-width: 300px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .screenshot-item:hover {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 30px 80px rgba(255, 62, 157, 0.5);
+            border-color: var(--accent-pink);
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 20px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-icon {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .step:nth-child(2) .step-icon {
+            animation-delay: 0.3s;
+        }
+
+        .step:nth-child(3) .step-icon {
+            animation-delay: 0.6s;
+        }
+
+        .step:nth-child(4) .step-icon {
+            animation-delay: 0.9s;
+        }
+
+        .step h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent-yellow);
+            font-weight: 800;
+        }
+
+        .step p {
+            color: var(--text-gray);
+            line-height: 1.9;
+            font-size: 1.1rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-cyan) 100%);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .stat-label {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 20px;
+            background: var(--gradient-bg);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact p {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            color: var(--text-gray);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 1.4rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px 50px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(15px);
+            border-color: var(--accent-yellow);
+        }
+
+        .contact-item a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-yellow);
+            transform: translateY(-3px);
+        }
+
+        .footer p {
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.3rem;
+            }
+
+            .sub-tagline {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .token-card {
+                padding: 20px 30px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .screenshot-item {
+                min-width: 250px;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg" id="animatedBg"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="logo-container">
+            <div class="pulse-ring"></div>
+            <img src="./assets/heywhoo-logo.png" alt="HeyWhoo Logo">
+        </div>
+        <h1>HEYWHOO</h1>
+        <p class="tagline">The Ultimate Social Guessing Game</p>
+        <p class="sub-tagline">💎 Guess Who? Human or AI?</p>
+        
+        <div class="cta-buttons">
+            <a href="#" class="btn btn-primary">🎮 Play Now</a>
+            <a href="#contact" class="btn btn-secondary">📧 Contact Us</a>
+        </div>
+
+        <div class="token-showcase">
+            <div class="token-card">
+                <div class="token-icon">⏰</div>
+                <div class="token-number">3</div>
+                <div class="token-label">Daily Tokens</div>
+            </div>
+            <div class="token-card">
+                <div class="token-icon">⭐</div>
+                <div class="token-number">∞</div>
+                <div class="token-label">Rewards</div>
+            </div>
+            <div class="token-card">
+                <div class="token-icon">⚡</div>
+                <div class="token-number">∞</div>
+                <div class="token-label">Total Tokens</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Play HeyWhoo?</h2>
+            <p class="section-subtitle">Experience the most thrilling social guessing game ever created</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Mystery Matching</h3>
+                    <p>Get matched with either humans or AI. Can you tell the difference? Test your detective skills!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Real-time Chat</h3>
+                    <p>Engage in natural conversations and look for clues. Every message brings you closer to the truth!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔮</div>
+                    <h3>Make Your Guess</h3>
+                    <p>Human or AI Robot? Make your decision and see if you're right. Win tokens for correct guesses!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Compete & Rank</h3>
+                    <p>Climb the leaderboards! Become a Top Detective, Master Deceiver, or the Most Fooled player!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎟️</div>
+                    <h3>Token System</h3>
+                    <p>Earn 3 daily tokens plus rewards for correct guesses. The more you play, the more you earn!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Beautiful Design</h3>
+                    <p>Stunning cyberpunk-inspired interface with smooth animations and immersive effects!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots">
+        <div class="container">
+            <h2 class="section-title">See HeyWhoo in Action</h2>
+            <p class="section-subtitle">Beautiful interface, thrilling gameplay</p>
+            
+            <div class="screenshots-scroll">
+                <div class="screenshot-item">
+                    <img src="./assets/1.png" alt="Screen 1">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./assets/2.png" alt="Screen 2">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./assets/3.png" alt="Screen 3">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./assets/4.png" alt="Screen 4">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./assets/5.png" alt="Screen 5">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./assets/6.png" alt="Screen 6">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./assets/7.png" alt="Screen 7">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./assets/8.png" alt="Screen 8">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./assets/9.png" alt="Screen 9">
+                </div>
+                <div class="screenshot-item">
+                    <img src="./assets/10.png" alt="Screen 10">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Start playing in four simple steps</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-icon">🔍</div>
+                    <h3>1. Find Match</h3>
+                    <p>Use your daily tokens to get matched with a mystery entity. Will it be human or AI?</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">💭</div>
+                    <h3>2. Chat & Analyze</h3>
+                    <p>Engage in conversation and look for clues. Ask questions, observe patterns, and gather evidence!</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">🎯</div>
+                    <h3>3. Make Your Guess</h3>
+                    <p>Human or AI Robot? Trust your instincts and make your decision. The truth will be revealed!</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">🏅</div>
+                    <h3>4. Win & Rank Up</h3>
+                    <p>Correct guesses earn you tokens and boost your rank. Climb the leaderboards and become legendary!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">🔒</div>
+                <div class="stat-label">100% Anonymous</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-label">Instant Matching</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🎮</div>
+                <div class="stat-label">Addictive Gameplay</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🌟</div>
+                <div class="stat-label">Epic Rewards</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2>Get In Touch</h2>
+            <p>Have questions or feedback? We'd love to hear from you!</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:heywhoo@yhallc.com">heywhoo@yhallc.com</a>
+                </div>
+            </div>  
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="./privacy/index.html">Privacy Policy</a>
+            <a href="./terms/index.html">Terms of Service</a>
+            <a href="./delete-account/index.html">Delete Account</a>
+            <a href="mailto:heywhoo@yhallc.com">Contact</a>
+        </div>
+        <p>&copy; 2026 HeyWhoo. All rights reserved.</p>
+    </div>
+
+    <script>
+        // Create animated background
+        const bg = document.getElementById('animatedBg');
+        
+        // Create stars
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            bg.appendChild(star);
+        }
+        
+        // Create floating particles
+        const colors = ['#FF3E9D', '#00D9FF', '#FFE500', '#00FF88'];
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'floating-particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.width = Math.random() * 8 + 3 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+            particle.style.opacity = Math.random() * 0.5 + 0.2;
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            bg.appendChild(particle);
+        }
+    </script>
+</body>
+</html>

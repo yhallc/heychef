@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HeyWhoo - Reset Password">
+    <title>Reset Your Password - HeyWhoo</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #1a1a2e;
+            --secondary-purple: #252541;
+            --accent-yellow: #FFE500;
+            --accent-pink: #FF3E9D;
+            --accent-cyan: #00D9FF;
+            --accent-green: #00FF88;
+            --success-color: #00FF88;
+            --error-color: #FF3E9D;
+            --text-light: #ffffff;
+            --text-gray: #b8b8d1;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated stars */
+        .star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 550px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.6s ease-out;
+            margin: auto;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(255, 229, 0, 0.3);
+            border: 2px solid var(--accent-yellow);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 15px rgba(255, 62, 157, 0.5));
+        }
+
+        .lock-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease-out 0.3s both;
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.4);
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lock-icon svg {
+            width: 45px;
+            height: 45px;
+            stroke: white;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeIn 0.6s ease-out 0.4s both;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 35px;
+            line-height: 1.6;
+            animation: fadeIn 0.6s ease-out 0.5s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+            animation: fadeIn 0.6s ease-out 0.6s both;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .password-input-wrapper {
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 16px 50px 16px 18px;
+            font-size: 1.05rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-password:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .password-strength {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        .strength-bar {
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background-color 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .strength-weak { width: 33%; background: var(--error-color); }
+        .strength-medium { width: 66%; background: var(--accent-yellow); }
+        .strength-strong { width: 100%; background: var(--success-color); }
+
+        .message {
+            padding: 18px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            animation: fadeIn 0.3s ease-out;
+            font-weight: 600;
+        }
+
+        .error-message {
+            background: rgba(255, 62, 157, 0.2);
+            color: var(--accent-pink);
+            border: 2px solid var(--accent-pink);
+        }
+
+        .success-message {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success-color);
+            border: 2px solid var(--success-color);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            animation: fadeIn 0.6s ease-out 0.7s both;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--accent-yellow);
+            color: var(--primary-purple);
+            box-shadow: 0 10px 30px rgba(255, 229, 0, 0.4);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 229, 0, 0.6);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent-cyan);
+            border: 2px solid var(--accent-cyan);
+            margin-top: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-cyan);
+            color: var(--primary-purple);
+        }
+
+        .footer-text {
+            margin-top: 30px;
+            color: var(--text-gray);
+            font-size: 1rem;
+            animation: fadeIn 0.6s ease-out 0.8s both;
+        }
+
+        .footer-text a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-text a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(26, 26, 46, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-purple);
+            animation: spin 0.8s ease-in-out infinite;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .logo {
+                width: 80px;
+                height: 80px;
+            }
+
+            .lock-icon {
+                width: 70px;
+                height: 70px;
+            }
+
+            .lock-icon svg {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="../assets/heywhoo-logo.png" alt="HeyWhoo Logo">
+        </div>
+
+        <!-- Lock Icon -->
+        <div class="lock-icon">
+            <svg viewBox="0 0 24 24">
+                <rect x="5" y="11" width="14" height="10" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+        </div>
+
+        <!-- Main Content -->
+        <h1>Reset Password</h1>
+        <p class="subtitle">Enter a new password for your HeyWhoo account</p>
+
+        <!-- Messages -->
+        <div id="messageContainer"></div>
+
+        <!-- Password Reset Form -->
+        <form id="resetForm">
+            <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <div class="password-input-wrapper">
+                    <input 
+                        type="password" 
+                        id="newPassword" 
+                        placeholder="Enter your new password"
+                        required
+                        minlength="8"
+                    >
+                    <button type="button" class="toggle-password" onclick="togglePassword('newPassword')">
+                        👁️
+                    </button>
+                </div>
+                <div class="strength-bar">
+                    <div class="strength-fill" id="strengthBar"></div>
+                </div>
+                <div class="password-strength" id="strengthText"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-input-wrapper">
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        placeholder="Confirm your new password"
+                        required
+                        minlength="8"
+                    >
+                    <button type="button" class="toggle-password" onclick="togglePassword('confirmPassword')">
+                        👁️
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+                Reset Password
+            </button>
+        </form>
+
+        <a href="../index.html" class="btn btn-secondary">Back to Home</a>
+
+        <!-- Footer -->
+        <p class="footer-text">
+            Need help? Contact us at <a href="mailto:heywhoo@yhallc.com">heywhoo@yhallc.com</a>
+        </p>
+    </div>
+
+    <script>
+        // Create animated stars
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(star);
+        }
+
+        // Password visibility toggle
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        // Password strength checker
+        function checkPasswordStrength(password) {
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (password.length >= 12) strength++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+            if (/\d/.test(password)) strength++;
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+
+            return strength;
+        }
+
+        // Update password strength indicator
+        document.getElementById('newPassword').addEventListener('input', (e) => {
+            const password = e.target.value;
+            const strength = checkPasswordStrength(password);
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+
+            strengthBar.className = 'strength-fill';
+            
+            if (password.length === 0) {
+                strengthText.textContent = '';
+            } else if (strength <= 2) {
+                strengthBar.classList.add('strength-weak');
+                strengthText.textContent = '⚠️ Weak password';
+                strengthText.style.color = 'var(--error-color)';
+            } else if (strength <= 4) {
+                strengthBar.classList.add('strength-medium');
+                strengthText.textContent = '⚡ Medium password';
+                strengthText.style.color = 'var(--accent-yellow)';
+            } else {
+                strengthBar.classList.add('strength-strong');
+                strengthText.textContent = '✅ Strong password';
+                strengthText.style.color = 'var(--success-color)';
+            }
+        });
+
+        // Show message
+        function showMessage(message, type = 'error') {
+            const container = document.getElementById('messageContainer');
+            container.innerHTML = `
+                <div class="${type}-message message">
+                    ${message}
+                </div>
+            `;
+        }
+
+        // Clear message
+        function clearMessage() {
+            document.getElementById('messageContainer').innerHTML = '';
+        }
+
+        // Get URL parameters (hash-based for Supabase)
+        function getHashParams() {
+            const hash = window.location.hash.substring(1);
+            const params = {};
+            hash.split('&').forEach(item => {
+                const [key, value] = item.split('=');
+                if (key) params[key] = decodeURIComponent(value);
+            });
+            return params;
+        }
+
+        // Handle form submission
+        document.getElementById('resetForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearMessage();
+
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Validation
+            if (newPassword.length < 8) {
+                showMessage('⚠️ Password must be at least 8 characters long', 'error');
+                return;
+            }
+
+            if (newPassword !== confirmPassword) {
+                showMessage('⚠️ Passwords do not match', 'error');
+                return;
+            }
+
+            // Get access token from URL
+            const params = getHashParams();
+            const accessToken = params.access_token;
+
+            if (!accessToken) {
+                showMessage('⚠️ Invalid or expired reset link. Please request a new password reset.', 'error');
+                return;
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading-spinner"></span>Resetting...';
+
+            try {
+                // Simulate API call (replace with actual Supabase call when ready)
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Success! Redirect to success page
+                showMessage('✅ Password reset successfully! Redirecting...', 'success');
+                submitBtn.innerHTML = '<span class="loading-spinner"></span>Success!';
+                
+                setTimeout(() => {
+                    window.location.href = './reset-success.html';
+                }, 1500);
+
+            } catch (error) {
+                showMessage(error.message || '❌ An error occurred. Please try again.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Reset Password';
+            }
+        });
+
+        // Check if access token exists on page load
+        window.addEventListener('load', () => {
+            const params = getHashParams();
+            if (!params.access_token && !params.type) {
+                showMessage('⚠️ This link appears to be invalid or expired. Please request a new password reset.', 'error');
+                document.getElementById('submitBtn').disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="HeyWhoo - Password Reset Successful">
+    <meta name="author" content="HeyWhoo">
+
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../assets/icon-512.png">
+
+    <title>Password Reset Successful - HeyWhoo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-purple: #1a1a2e;
+            --secondary-purple: #252541;
+            --accent-yellow: #FFE500;
+            --accent-pink: #FF3E9D;
+            --accent-cyan: #00D9FF;
+            --accent-green: #00FF88;
+            --success-color: #00FF88;
+            --text-light: #ffffff;
+            --text-gray: #b8b8d1;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, var(--accent-green) 0%, #00CC70 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated stars */
+        .star {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .container {
+            max-width: 650px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+            animation: fadeInScale 0.8s ease-out;
+            margin: auto;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 25px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .success-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            background: linear-gradient(135deg, var(--accent-green), #00CC70);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: popIn 0.5s ease-out 0.3s both, pulse 2s ease-in-out 0.8s infinite;
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.5);
+            position: relative;
+        }
+
+        .success-icon::before {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            border: 3px solid var(--accent-green);
+            border-radius: 50%;
+            opacity: 0;
+            animation: ripple 2s ease-out infinite;
+        }
+
+        .success-icon svg {
+            width: 70px;
+            height: 70px;
+            fill: white;
+        }
+
+        .checkmark {
+            stroke: white;
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            animation: drawCheck 0.8s ease-out 0.5s forwards;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--primary-purple);
+            margin-bottom: 15px;
+            animation: fadeInUp 0.6s ease-out 0.5s both;
+            font-weight: 900;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: var(--secondary-purple);
+            margin-bottom: 35px;
+            animation: fadeInUp 0.6s ease-out 0.6s both;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.15) 0%, rgba(0, 204, 112, 0.15) 100%);
+            border: 2px solid var(--accent-green);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: left;
+            animation: fadeIn 0.6s ease-out 0.7s both;
+        }
+
+        .info-box h3 {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary-purple);
+            font-size: 1.05rem;
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        .info-list li::before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, rgba(255, 229, 0, 0.15) 0%, rgba(255, 200, 0, 0.15) 100%);
+            border: 2px solid var(--accent-yellow);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: left;
+            animation: fadeIn 0.6s ease-out 0.8s both;
+        }
+
+        .tip-box h3 {
+            color: var(--accent-yellow);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+        }
+
+        .tip-box p {
+            color: var(--primary-purple);
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .tip-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        .tip-box strong {
+            color: var(--secondary-purple);
+            font-weight: 700;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            animation: fadeIn 0.6s ease-out 0.9s both;
+        }
+
+        .btn {
+            padding: 20px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-yellow), var(--accent-pink));
+            color: var(--primary-purple);
+            box-shadow: 0 10px 30px rgba(255, 229, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 229, 0, 0.6);
+        }
+
+        .footer-text {
+            margin-top: 35px;
+            color: var(--secondary-purple);
+            font-size: 1rem;
+            animation: fadeIn 0.6s ease-out 1s both;
+        }
+
+        .footer-text a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Confetti animation */
+        .confetti {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background: red;
+            border-radius: 50%;
+            opacity: 0;
+            animation: confetti-fall 5s ease-out forwards;
+            z-index: 9999;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            70% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 15px 40px rgba(0, 255, 136, 0.5);
+            }
+            50% {
+                box-shadow: 0 15px 50px rgba(0, 255, 136, 0.7);
+            }
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes drawCheck {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 40px 30px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .logo {
+                width: 100px;
+                height: 100px;
+                padding: 15px;
+            }
+
+            .success-icon {
+                width: 100px;
+                height: 100px;
+            }
+
+            .success-icon svg {
+                width: 60px;
+                height: 60px;
+            }
+
+            .btn {
+                padding: 18px 40px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="../assets/heywhoo-logo.png" alt="HeyWhoo Logo">
+        </div>
+
+        <!-- Success Icon with Animated Checkmark -->
+        <div class="success-icon">
+            <svg viewBox="0 0 52 52">
+                <path class="checkmark" d="M14 27l7.5 7.5L38 18"/>
+            </svg>
+        </div>
+
+        <!-- Main Content -->
+        <h1>Success! 🎉</h1>
+        <p class="subtitle">Your password has been successfully reset.</p>
+
+        <!-- Info Box -->
+        <div class="info-box">
+            <h3>
+                <span>🔐</span>
+                What's Next?
+            </h3>
+            <ul class="info-list">
+                <li>Your new password is now active</li>
+                <li>Open the HeyWhoo app on your device</li>
+                <li>Log in with your email and new password</li>
+                <li>Start playing and guessing!</li>
+            </ul>
+        </div>
+
+        <!-- Instructions Box -->
+        <div class="tip-box">
+            <h3>
+                <span>📱</span>
+                How to Log In
+            </h3>
+            <p><strong>Step 1:</strong> Open the HeyWhoo app on your phone or tablet</p>
+            <p><strong>Step 2:</strong> Enter your email address</p>
+            <p><strong>Step 3:</strong> Enter your new password</p>
+            <p style="margin-top: 20px; padding-top: 20px; border-top: 2px solid rgba(255, 229, 0, 0.3);">
+                <strong>💡 Tip:</strong> Make sure you're using the new password you just created! For security, consider using a password manager to store it securely.
+            </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="buttons">
+            <a href="../index.html" class="btn btn-primary">Back to Home</a>
+        </div>
+
+        <!-- Footer -->
+        <p class="footer-text">
+            Need help? Contact us at <a href="mailto:heywhoo@yhallc.com">heywhoo@yhallc.com</a>
+        </p>
+    </div>
+
+    <script>
+        // Create animated stars
+        for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(star);
+        }
+
+        // Add celebratory confetti
+        function createConfetti() {
+            const colors = ['#FFE500', '#FF3E9D', '#00D9FF', '#00FF88', '#8B5CF6', '#F59E0B'];
+            for (let i = 0; i < 60; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    confetti.style.animationDuration = Math.random() * 2 + 3 + 's';
+                    
+                    // Random shapes
+                    if (Math.random() > 0.5) {
+                        confetti.style.borderRadius = '0';
+                        confetti.style.width = '18px';
+                        confetti.style.height = '10px';
+                    }
+                    
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 6000);
+                }, i * 30);
+            }
+        }
+
+        // Trigger confetti on page load
+        window.onload = () => {
+            createConfetti();
+            
+            // Bonus confetti after 2 seconds
+            setTimeout(createConfetti, 2000);
+            
+            // And one more burst after 4 seconds
+            setTimeout(createConfetti, 4000);
+        };
+    </script>
+</body>
+</html>
